@@ -1,0 +1,15 @@
+{
+  "name": "Good-morning-weather",
+  "version": "1.0.0",
+  "description": "<h1 align=\"center\">🥶 Good-morning-weather</h1>",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "dotenv": "^12.0.4",
+    "node-telegram-bot-api": "^0.56.0"
+  }
+}

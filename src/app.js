@@ -8,31 +8,7 @@ const axios = require("axios");
 const TelegramBot = require("node-telegram-bot-api");
 const token = process.env.TELEGRAM_TOKEN;
 const bot = new TelegramBot(token, { polling: true });
-
-/**
- * Collecting data from the API endpoint of the weather service.
- * After sending axios get request from the service,
- * We are manipulating the hour, and validating
- * On the current day if we have any value
- * That contains "rain" at the forcast.
- *
- * @return {Array} dayRainInformation Mapped results from the API request.
- */
-const collectWeatherApi = async () => {
-  const dayRainInformation = [];
-
-  return await axios.get(process.env.API_URL).then((apiResponse) => {
-    apiResponse.data.forecast.forecastday[0].hour.map((dayResponse) => {
-      const dayHourTime = dayResponse.time;
-      const dayShortHourTime = dayHourTime.substr(dayHourTime.length - 5);
-      const dayCondition = dayResponse.condition.text;
-      if (dayCondition.includes("rain")) {
-        dayRainInformation.push({ rainyHour: dayShortHourTime });
-      }
-    });
-    return dayRainInformation;
-  });
-};
+const { collectWeatherApi } = require("../services/api.js");
 
 const init = async () => {
   /**
@@ -43,19 +19,18 @@ const init = async () => {
     const userInputMessage = msg.text;
 
     if (
-      userInputMessage.toLowerCase() === "tell" ||
-      userInputMessage.toLowerCase() === "גשם"
+      userInputMessage.toLowerCase() === "rain" ||
+      userInputMessage === "גשם"
     ) {
       let messageVariable = "";
       const apiRequest = await collectWeatherApi();
-      const apiRequestOrdered = apiRequest.map((apiRequestItem) => {
+      apiRequest.map((apiRequestItem) => {
         const { rainyHour } = apiRequestItem;
         const hour = Number(rainyHour.substr(0, 2));
 
         if (hour > 7) {
-          messageVariable += `גשם מתחיל בשעה ${apiRequestItem.rainyHour},\n`;
+          messageVariable += `* [${apiRequestItem.rainyHour}] ${apiRequestItem.condition} ${apiRequestItem.chance}% \n Temp: ${apiRequestItem.temp}C, Wind: ${apiRequestItem.wind} km/h\n\n`;
         }
-
         return;
       });
       if (messageVariable.length) {

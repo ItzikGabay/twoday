@@ -1,10 +1,23 @@
-<h1 align="center">🥶 Good-morning-weather</h1>
+<h1 align="center">⛈ Is Rainy Today</h1>
+<p align="center">Own a private telegram bot that tells you the weather every morning.</p>
+<p align="center">* Builded for my own purposes only.</p>
 
-<hr>
+---
 
-<h4 align="center">Your good morning meesage includes:</h4>
-<p align="center">The weather tempature, it is rainy today(?), and wind km/h.</p>
+<h3 align="center"></h3>
 
-<p align="center">License of <a href="#">MIT.</a></p>
+## The morning meesage includes:
 
-<p align="center">Developed with a lot of ❤️ by <a href="#">@itzikdevio</a></p>
+- [x] Rain - Which hours
+- [x] Weather tempature
+- [x] Wind km/h
+
+---
+
+## Demo:
+
+### SOON.
+
+<p align="center">License by <a href="#">MIT.</a></p>
+
+<p align="center">Developed with  ❤️ by <a href="#">@itzikdevio</a></p>
